@@ -1,6 +1,12 @@
 pipeline {
     agent none
     stages {
+    	stage('Branch') {
+            agent any
+            steps {
+                echo 'main'
+            }
+        }
         stage('Build') {
             agent {
                 docker {
@@ -43,12 +49,6 @@ pipeline {
                 success {
                     archiveArtifacts "${env.BUILD_ID}/sources/dist/prog"
                 }
-            }
-        }
-        stage('Branch') {
-            agent any
-            steps {
-                echo 'nom-de-la-branche'
             }
         }
     }
